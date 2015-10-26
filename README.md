@@ -1,14 +1,14 @@
 Dear Sky Apps Team,
 
-to run my test you need:
-*clone from repo
-*npm install
-*bower install
-*make sure you got mongodb running
-*grunt serve
+To run my test you need:
+  * clone from repo
+  * npm install
+  * bower install
+  * make sure you got mongodb running
+  * grunt serve
 
 If you want to run tests:
-*grunt karma
+  * grunt karma
 
 
 Best regards,
