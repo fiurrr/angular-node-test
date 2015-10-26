@@ -10,6 +10,6 @@ var router = express.Router();
 require('./setup')(User);
 
 router.post('/', controller.login);
-router.delete('/', authService.isAuthenticated(), controller.logout);
+router.get('/logout', authService.isAuthenticated(), controller.logout);
 
 module.exports = router;

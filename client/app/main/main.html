@@ -1,2 +1,19 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
+<div ng-if="isAdmin()">
+    <md-content>
+        <md-list>
+            <md-list-item class="md-3-line" ng-repeat="item in entries">
+                <div class="md-list-item-text">
+                    <h3>{{item.username}}</h3>
+                    <h4>{{item.ip}}</h4>
+
+                    <p>{{item.timestamp}}</p>
+                </div>
+                <md-button class="action" ng-class="{'failed': item.action ==='AUTH_FAILURE'}">{{item.action}}
+                </md-button>
+                <md-divider></md-divider>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</div>

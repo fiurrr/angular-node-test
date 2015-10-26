@@ -8,13 +8,14 @@
         'ngMaterial'
     ]);
 
-    app.config(function ($routeProvider, $locationProvider) {
+    app.config(function ($routeProvider, $locationProvider, $httpProvider) {
         $routeProvider
             .otherwise({
                 redirectTo: '/login'
             });
 
         $locationProvider.html5Mode(true);
+        $httpProvider.interceptors.push('authInterceptor');
     });
 
     authInterceptor.$inject = ['$rootScope', '$q', 'session', '$location'];
@@ -24,7 +25,7 @@
         return {
             request: function (config) {
                 config.headers = config.headers || {};
-                if (session.get('token')) {
+                if (session.getToken()) {
                     config.headers.Authorization = 'Bearer ' + session.getToken();
                 }
                 return config;

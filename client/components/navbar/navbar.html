@@ -1,6 +1,6 @@
 <div ng-controller="NavbarCtrl">
     <div ng-if="username">
         Hello <strong>{{username}}</strong>!
-        <md-button class="md-raised">Logout</md-button>
+        <md-button class="logoutButton md-raised" ng-click="logout()">Logout</md-button>
     </div>
 </div>

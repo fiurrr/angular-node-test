@@ -5,14 +5,23 @@
     angular.module('testApp').controller('MainCtrl', MainCtrl);
 
     function MainCtrl($scope, session, mainDao) {
-        $scope.role = session.getRole();
-        mainDao.getList()
-            .success(function (res) {
-                $scope.entries = res.logs;
-            })
-            .error(function (res) {
-                console.log(res);
-            });
+        var role = session.getRole();
+
+        $scope.isAdmin = isAdmin;
+
+        if(isAdmin()) {
+            mainDao.getList()
+                .success(function (res) {
+                    $scope.entries = res.logs;
+                })
+                .error(function (res) {
+                    console.log(res);
+                });
+        }
+
+        function isAdmin() {
+            return role === 'admin';
+        }
     }
 })();
 

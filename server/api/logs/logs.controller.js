@@ -8,7 +8,7 @@ exports.list = function (req, res) {
         if (err) {
             return handleError(res, err);
         }
-        return res.status(200).json(logs);
+        return res.status(200).json({logs: logs});
     });
 };
 
