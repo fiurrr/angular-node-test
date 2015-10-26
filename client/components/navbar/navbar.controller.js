@@ -1,15 +1,18 @@
 'use strict';
 
-angular.module('testApp')
-  .controller('NavbarCtrl', function ($scope, $location) {
-    $scope.menu = [{
-      'title': 'Home',
-      'link': '/'
-    }];
+(function () {
+    NavbarCtrl.$inject = ['$scope', '$location', 'session'];
+    angular.module('testApp').controller('NavbarCtrl', NavbarCtrl);
 
-    $scope.isCollapsed = true;
+    function NavbarCtrl($scope, $location, session) {
 
-    $scope.isActive = function(route) {
-      return route === $location.path();
-    };
-  });
+        function init() {
+            $scope.username = session.getUsername();
+            if (!$scope.username) {
+                $location.path('/login');
+            }
+        }
+
+        init();
+    }
+})();

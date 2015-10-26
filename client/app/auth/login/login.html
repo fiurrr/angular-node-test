@@ -1,0 +1,22 @@
+<main class="loginFrame">
+  <h2>Login into application:</h2>
+  <form name="loginForm" ng-submit="submit()">
+    <md-input-container>
+      <label>Username</label>
+      <input ng-change="error = ''" required name="username" ng-model="username">
+      <div ng-show="!loginForm.username.$untouched && !loginForm.username.$valid" ng-messages="loginForm.username.$error">
+        <div ng-message="required">This is required.</div>
+      </div>
+    </md-input-container>
+    <md-input-container>
+      <label>Password</label>
+      <input ng-change="error = ''" required type="password" name="password" ng-model="password">
+      <div ng-show="!loginForm.password.$untouched && !loginForm.password.$valid" ng-messages="loginForm.password.$error">
+        <div ng-message="required">This is required.</div>
+      </div>
+    </md-input-container>
+    <md-button class="md-raised" ng-click="submit()">Button</md-button>
+
+    <div ng-if="error" ng-message="required">{{error}}</div>
+  </form>
+</main>

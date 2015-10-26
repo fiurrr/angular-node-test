@@ -1,22 +1,18 @@
 'use strict';
 
-angular.module('testApp')
-  .controller('MainCtrl', function ($scope, $http) {
-    $scope.awesomeThings = [];
+(function () {
+    MainCtrl.$inject = ['$scope', 'session', 'mainDao'];
+    angular.module('testApp').controller('MainCtrl', MainCtrl);
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-    });
+    function MainCtrl($scope, session, mainDao) {
+        $scope.role = session.getRole();
+        mainDao.getList()
+            .success(function (res) {
+                $scope.entries = res.logs;
+            })
+            .error(function (res) {
+                console.log(res);
+            });
+    }
+})();
 
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
-        return;
-      }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
-    };
-
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
-    };
-  });
